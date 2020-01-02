@@ -102,7 +102,6 @@ void step(double dt, double imax, double h, vector<double>& v, vector<complex<do
     // set ws[1], ws[2], ws[3]
     for (int i=1; i <= 3; i++) {
         for (int j=1; j < imax-1; j++) {
-        // potentialが大きいと誤差がblow-upするので丸めておく
             complex<double> ws_ij = 1.0i * dt
             * (
                 1.0 / pow(h, 2)
