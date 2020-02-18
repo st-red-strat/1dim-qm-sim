@@ -88,6 +88,9 @@ void phiInit (int imax, double h, vector<complex<double>>& phi) {
 void step(double dt, double imax, double h, vector<double>& v, vector<complex<double>>& phi, vector< vector<complex<double>> >& ws) {
     vector<double> factor = {0.5, 0.5, 1.0};
 
+            // Note the fixed end boundary condition
+            //  (j = 0, imax-1 components of ws[0,1,2,3] are not updated)
+            // and set imax large enough to avoid unphysical reflection from end points
     // set ws[0]
     for (int j=1; j < imax-1; j++) {
         complex<double> ws0_j = 1.0i * dt
@@ -102,9 +105,6 @@ void step(double dt, double imax, double h, vector<double>& v, vector<complex<do
     // set ws[1], ws[2], ws[3]
     for (int i=1; i <= 3; i++) {
         for (int j=1; j < imax-1; j++) {
-            // Note the fixed end boundary condition
-            //  (j = 0, imax-1 components are not updated)
-            // and set imax large enough to avoid unphysical reflection from end points
             complex<double> ws_ij = 1.0i * dt
             * (
                 1.0 / pow(h, 2)
